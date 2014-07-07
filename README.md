@@ -17,6 +17,7 @@ This plugin requires the path to the log file.
 ``` ruby
 Lita.configure do |config|
   config.handlers.logger.log_file = "/tmp/lita_chat.log"
+  config.handlers.logger.enable_http_log = true
 end
 ```
 

@@ -7,6 +7,7 @@ module Lita
 
       def self.default_config(config)
         config.log_file = nil
+        config.enable_http_log = false
       end
 
       route(/.*/, :logger)
@@ -24,7 +25,7 @@ module Lita
       end
 
       def chat_log(request, response)
-        if !Lita.config.handlers.logger.log_file
+        if !Lita.config.handlers.logger.log_file || !Lita.config.handlers.logger.enable_http_log
           return
         end
 
