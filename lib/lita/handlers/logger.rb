@@ -12,13 +12,11 @@ module Lita
       route(/.*/, :logger)
 
       def logger(response)
-        if Lita.config.handlers.logger.log_file
+        if Lita.config.handlers.logger.log_file && !response.message.source.private_message
           File.open(Lita.config.handlers.logger.log_file, 'a') do |f|
-            f.puts "[#{Time.now}] Message: " + response.message.inspect
-            f.puts "[#{Time.now}] User: " + response.user.inspect
+            f.puts "[#{Time.now}] [#{response.user.name} in #{response.message.source.room}] #{response.message.body}"
           end
         end
-
       end
 
     end
