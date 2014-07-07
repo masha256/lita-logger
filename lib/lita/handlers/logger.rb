@@ -32,9 +32,10 @@ module Lita
         response.headers.delete('Transfer-Encoding')
 
         File.open(Lita.config.handlers.logger.log_file, "r") do |f|
-          while (line = f.gets)
-            response.body << line
-          end
+          # while (line = f.gets)
+          #   response.body << line
+          # end
+          response.body << file.read
         end
       end
 
