@@ -14,8 +14,8 @@ module Lita
       def logger(response)
         if Lita.config.handlers.logger.log_file
           File.open(Lita.config.handlers.logger.log_file, 'a') do |f|
-            s.puts "[#{Time.now}] Message: " + response.message.inspect
-            s.puts "[#{Time.now}] User: " + response.user.inspect
+            f.puts "[#{Time.now}] Message: " + response.message.inspect
+            f.puts "[#{Time.now}] User: " + response.user.inspect
           end
         end
 
