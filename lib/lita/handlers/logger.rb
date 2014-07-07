@@ -29,13 +29,9 @@ module Lita
         end
 
         response.headers["Content-Type"] = "text/plain"
-        response.headers.delete('Transfer-Encoding')
 
         File.open(Lita.config.handlers.logger.log_file, "r") do |f|
-          # while (line = f.gets)
-          #   response.body << line
-          # end
-          response.body << file.read
+          response.write f.read
         end
       end
 
