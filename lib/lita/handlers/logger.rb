@@ -11,14 +11,30 @@ module Lita
 
       route(/.*/, :logger)
 
+      http.get "/chat_log", :chat_log
+
+      end
+
       def logger(response)
-        if Lita.config.handlers.logger.log_file && !response.message.source.private_message
-          File.open(Lita.config.handlers.logger.log_file, 'a') do |f|
-            f.puts "[#{Time.now}] [#{response.user.name} in #{response.message.source.room}] #{response.message.body}"
-          end
+        if !Lita.config.handlers.logger.log_file || response.message.source.private_message || !response.message.body
+          return
+        end
+
+        File.open(Lita.config.handlers.logger.log_file, 'a') do |f|
+          f.puts "[#{Time.now}] [#{response.user.name} in #{response.message.source.room}] #{response.message.body}"
         end
       end
 
+    def chat_log(request, response)
+      if !Lita.config.handlers.logger.log_file
+        return
+      end
+
+      File.open(Lita.config.handlers.logger.log_file, "r") do |f|
+        while (line = f.gets)
+          response.body << line
+        end
+      end
     end
 
     Lita.register_handler(Logger)
