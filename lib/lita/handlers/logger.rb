@@ -13,8 +13,6 @@ module Lita
 
       http.get "/chat_log", :chat_log
 
-      end
-
       def logger(response)
         if !Lita.config.handlers.logger.log_file || response.message.source.private_message || !response.message.body
           return
@@ -25,18 +23,21 @@ module Lita
         end
       end
 
-    def chat_log(request, response)
-      if !Lita.config.handlers.logger.log_file
-        return
-      end
+      def chat_log(request, response)
+        if !Lita.config.handlers.logger.log_file
+          return
+        end
 
-      File.open(Lita.config.handlers.logger.log_file, "r") do |f|
-        while (line = f.gets)
-          response.body << line
+        File.open(Lita.config.handlers.logger.log_file, "r") do |f|
+          while (line = f.gets)
+            response.body << line
+          end
         end
       end
+
     end
 
     Lita.register_handler(Logger)
   end
 end
+
