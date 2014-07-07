@@ -28,6 +28,8 @@ module Lita
           return
         end
 
+        response.headers["Content-Type"] = "text/plain"
+
         File.open(Lita.config.handlers.logger.log_file, "r") do |f|
           while (line = f.gets)
             response.body << line
