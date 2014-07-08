@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lita-logger (1.0.0)
+    lita-logger (1.0.1)
       lita (>= 3.3)
 
 GEM

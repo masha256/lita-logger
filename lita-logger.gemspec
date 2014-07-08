@@ -1,13 +1,13 @@
 Gem::Specification.new do |spec|
   spec.name          = "lita-logger"
-  spec.version       = "1.0.0"
+  spec.version       = "1.0.1"
   spec.authors       = ["Mike Machado"]
   spec.email         = ["mike@machadolab.com"]
   spec.description   = %q{A Lita handler to log all chat messages to a file}
   spec.summary       = %q{A Lita handler to log all chat messages to a file}
   spec.homepage      = "https://github.com/machadolab/lita-logger"
   spec.license       = "MIT"
-  spec.metadata      = { "lita_plugin_type" => "extension" }
+  spec.metadata      = { "lita_plugin_type" => "handler" }
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
