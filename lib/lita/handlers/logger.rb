@@ -5,10 +5,8 @@ module Lita
     class Logger < Handler
 
 
-      def self.default_config(config)
-        config.log_file = nil
-        config.enable_http_log = false
-      end
+      config :log_file
+      config :enable_http_log, default: false
 
       route(/.*/, :logger)
 
